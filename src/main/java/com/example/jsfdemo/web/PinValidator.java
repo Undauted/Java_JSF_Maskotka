@@ -14,14 +14,15 @@ public class PinValidator implements Validator {
 	public void validate(FacesContext context, UIComponent component, Object value)
 			throws ValidatorException {
 		
-		String pesel = (String) value;
+		String imie = (String) value;
 		
-		if (pesel.length() != 4) {
+		if (imie.length() < 4 || imie.length() > 20) {
 			FacesMessage message = new FacesMessage();
-			message.setDetail("PIN musi składać się z 4 cyfr");
-			message.setSummary("PIN musi składać się z 4 cyfr");
+			message.setDetail("Tekst materiału musi byc w przedziale 4-20");
+			message.setSummary("Tekst materiału musi byc w przedziale 4-20");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(message);
 		}
+		
 	}
 }

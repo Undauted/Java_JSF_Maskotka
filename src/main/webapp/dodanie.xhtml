@@ -3,12 +3,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/templates/wyglad.xhtml">
+	template="/templates/wyglad.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
 	<ui:define name="glowna">
-
-		<h:form id="personForm">
-          
-            
+		<h:form id="personform">
+			
 			<h:panelGrid columns="2">
 			
 				<h:outputText value="" />
@@ -19,7 +19,7 @@
 				
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
-			
+				
 				<h:outputText value="#{personBean.maskotka.setImie('')}" />
 				<h:outputText value="#{personBean.maskotka.setRodzaj('')}" />
 				
@@ -29,8 +29,8 @@
 				<h:outputText value="#{personBean.maskotka.setWeight(0.0)}" />
 				<h:outputText value="" />
 				
-
-					<h:outputText value="" />
+				
+				<h:outputText value="" />
 				<f:verbatim>  
 					<script type="text/javascript">  
 						function initCap(inputField)
@@ -44,11 +44,9 @@
 				
 				
 				<h:outputText value="#{msg.imieMaskotki}&#160;&#160;&#160;&#160;" />
-				<h:inputText id="name" value="#{personBean.maskotka.imie}" 
-				validator="#{personBean.uniqueImie}" required="#{true}" onchange="initCap(this)">
-					<f:validator validatorId="pinValidator" />
+				<h:inputText id="name" value="#{personBean.maskotka.imie}" required="#{true}" onchange="initCap(this)">
 				</h:inputText>
-
+				
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 
@@ -74,34 +72,28 @@
 				   <f:selectItem itemValue="Welur" itemLabel="Welur" />	 
 				   <f:selectItem itemValue="Polar" itemLabel="Polar" />	  							
 				</h:selectOneMenu>
-
-				<h:outputText value="#{msg.dataZakupu}" />
-				<h:inputText id="dob" value="#{personBean.maskotka.dateOfBirth}">
-				  <f:convertDateTime type="date" pattern="dd.MM.yyyy" />
-				</h:inputText>
 				
-				<h:outputText value="#{msg.waga}&#160;&#160;&#160;&#160;" />
-				<h:inputText id="weight" value="#{personBean.maskotka.weight}">
-					<f:validateDoubleRange minimum="1.5" maximum="10.5" />
-				</h:inputText>
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				
 				<h:outputText value="#{msg.zdjecieMaskotki}&#160;&#160;&#160;&#160;" />
 				<h:inputText id="zdjecie" value="#{personBean.maskotka.zdjecie}" required="#{true}"/>
-
+				
+				
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				
 				<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
 				<h:commandButton value="#{msg.zatwierdzenie}"
 				action="#{personBean.addPerson}" />
-				
 			</h:panelGrid>
+
 			
 			
-
-
+				
 			<h:panelGrid>
-				<h:messages id="messages" showDetail="#{true}"
-					showSummary="#{false}" />
+				<h:messages showDetail="#{true}" showSummary="#{false}" />
 			</h:panelGrid>
 		</h:form>
-
 	</ui:define>
 </ui:composition>

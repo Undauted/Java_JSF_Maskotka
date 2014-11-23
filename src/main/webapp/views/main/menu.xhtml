@@ -5,22 +5,22 @@
 	xmlns:h="http://java.sun.com/jsf/html">
   <div>
 	<h:form>
-	  <ul>
-		<li>
-		  <h:commandLink action="home?faces-redirect=true">
-			<h:outputText value="#{msg.linkHome}" />
+	  
+		
+		  <h:commandLink action="glowna?faces-redirect=true">
+			<h:outputText value="#{msg.glowna}" />
 		  </h:commandLink>
-		</li>
-		<li>
-		  <h:commandLink action="add?faces-redirect=true">
-			<h:outputText value="#{msg.personAddLabel}" />
-		  </h:commandLink></li>
-		<li>
-		  <h:commandLink action="showPersons?faces-redirect=true">
-			 <h:outputText value="#{msg.personAllLabel}" />
+		  <br/>
+		
+		  <h:commandLink action="dodaj?faces-redirect=true">
+			<h:outputText value="#{msg.dodanieMaskotki}" />
 		  </h:commandLink>
-		</li>
-	</ul>
+		<br/>
+		  <h:commandLink action="wyswie?faces-redirect=true">
+			 <h:outputText value="#{msg.lista}" />
+		  </h:commandLink>
+		
+	
    </h:form>
   </div>
 </ui:composition>

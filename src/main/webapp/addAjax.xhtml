@@ -3,46 +3,103 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/templates/default.xhtml">
-	<ui:define name="content">
+	template="/templates/wyglad.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<ui:define name="glowna">
 
 		<h:form id="personForm">
 			<h:panelGrid columns="2">
+				
+				<h:outputText value="" />
+				<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;
+				&#160;&#160;&#160;&#160;&#160;
+				&#160;&#160;&#160;&#160;
+				&#160;&#160;&#160;&#160;&#160;&#160;&#160;#{msg.dodaj}" />
+				
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				
+				<h:outputText value="#{personBean.maskotka.setImie('')}" />
+				<h:outputText value="#{personBean.maskotka.setRodzaj('')}" />
+				
+				<h:outputText value="#{personBean.maskotka.setMaterial('')}" />
+				<h:outputText value="#{personBean.maskotka.setZdjecie('')}" />
+				
+				<h:outputText value="#{personBean.maskotka.setWeight(0.0)}" />
+				<h:outputText value="" />
+				
+				<h:outputText value="" />
+				<f:verbatim>  
+					<script type="text/javascript">  
+						function initCap(inputField)
+						{
+						var v = inputField.value;
+						var f = v.charAt(0).toUpperCase();
+						inputField.value = f + v.substring(1,v.length);
+						}
+					</script>  
+				</f:verbatim>  
+				
+				<h:outputText value="#{msg.imieMaskotki}&#160;&#160;&#160;&#160;" />
+				<h:inputText id="name" value="#{personBean.maskotka.imie}" 
+					validator="#{personBean.uniqueImie}" required="#{true}" onchange="initCap(this)">
+				<f:validator validatorId="pinValidator" />
+				<f:ajax execute="@this" render="messages beanState" />
+				</h:inputText>
+				
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				
+				
+				<h:outputText value="#{msg.rodzajMaskotki}&#160;&#160;&#160;&#160;" />
+				<h:selectOneRadio value="#{personBean.maskotka.rodzaj}" layout="pageDirection"
+					 required="#{true}">
+					<f:selectItem itemValue="Mis" itemLabel="&#160;&#160;Miś" />
+				   	<f:selectItem itemValue="Zwierzatko" itemLabel="&#160;&#160;Zwierzątko" />
+				   	<f:selectItem itemValue="Postac z bajki" itemLabel="&#160;&#160;Postać z bajki" />
+				   	<f:selectItem itemValue="Postac z filmu" itemLabel="&#160;&#160;Postać z filmu" />
+				   	<f:selectItem itemValue="Pacynka" itemLabel="&#160;&#160;Pacynka" />
+				<f:ajax execute="@this" render="messages beanState" />
+				</h:selectOneRadio>
+				
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				
+				<h:outputText value="#{msg.materialMaskotki}&#160;&#160;&#160;&#160;" />
+				<h:selectOneMenu value="#{personBean.maskotka.material}">
+				   <f:selectItem itemValue="Plusz" itemLabel="Plusz" />
+				   <f:selectItem itemValue="Bawelna" itemLabel="Bawełna" />	 
+				   <f:selectItem itemValue="Len" itemLabel="Len" />	
+				   <f:selectItem itemValue="Dzianina" itemLabel="Dzianina" />	
+				   <f:selectItem itemValue="Welur" itemLabel="Welur" />	 
+				   <f:selectItem itemValue="Polar" itemLabel="Polar" />	  							
+				</h:selectOneMenu>
 
-				<h:outputText value="#{msg.personFirstNameLabel}" />
-				<h:inputText id="firstName" value="#{personBean.person.firstName}"
-					required="#{true}" />
+				<h:outputText value="#{msg.dataZakupu}&#160;&#160;&#160;&#160;" />
 
-				<h:outputText value="#{msg.personPinLabel}" />
-				<h:inputText id="pin" value="#{personBean.person.pin}"
-					validator="#{personBean.uniquePin}" required="#{true}">
-					<f:validator validatorId="pinValidator" />
-					<f:ajax execute="@this" render="messages beanState" />
+				<rich:calendar value="#{personBean.maskotka.dateOfBirth}"
+					id="calendar" datePattern="dd.MM.yyyy" showApplyButton="#{true}"
+					cellWidth="24px" cellHeight="22px" style="width:200px">
+					<a4j:ajax render="messages" execute="@this" />
+				</rich:calendar>
+
+				
+
+				<h:outputText value="#{msg.waga}&#160;&#160;&#160;&#160;" />
+				<h:inputText id="weight" value="#{personBean.maskotka.weight}">
+					<f:validateDoubleRange minimum="1.5" maximum="10.5" />
+					
 				</h:inputText>
 
-				<h:outputText value="#{msg.personDobLabel}" />
-				<h:inputText id="dob" value="#{personBean.person.dateOfBirth}">
-					<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
-				</h:inputText>
-
-				<h:outputText value="#{msg.personZipCodeLabel}" />
-				<h:inputText id="zipCode" value="#{personBean.person.zipCode}" />
-
-				<h:outputText value="#{msg.personWeightLabel}" />
-				<h:inputText id="weight" value="#{personBean.person.weight}">
-					<f:validateDoubleRange minimum="20.5" maximum="150.5" />
-					<f:ajax execute="@this" render="messages beanState" />
-				</h:inputText>
-
-				<h:outputText value="#{msg.personNumOfChildrenLabel}" />
-				<h:inputText id="noc" value="#{personBean.person.numOfChildren}">
-
-				</h:inputText>
+				<h:outputText value="#{msg.zdjecieMaskotki}&#160;&#160;&#160;&#160;" />
+				<h:inputText id="zdjecie" value="#{personBean.maskotka.zdjecie}" required="#{true}"/>
+				
+				<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
+				<h:commandButton value="#{msg.zatwierdzenie}"
+				action="#{personBean.addPerson}" />
 
 			</h:panelGrid>
-
-			<h:commandButton value="#{msg.personFormOKButton}"
-				action="#{personBean.addPerson}" />
 
 
 			<h:panelGrid>
@@ -51,15 +108,15 @@
 			</h:panelGrid>
 
 			<h:panelGrid id="beanState" columns="2">
-				<h:outputText value="#{msg.personFirstNameLabel}" />
-				<h:outputText id="nameOutput" value="#{personBean.person.firstName}" />
+				<h:outputText value="#{msg.imieMaskotki}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />
+				<h:outputText id="nameOutput" value="#{personBean.maskotka.imie}" />
 
-				<h:outputText value="#{msg.personPinLabel}" />
-				<h:outputText id="pinOutput" value="#{personBean.person.pin}" />
+				<h:outputText value="#{msg.rodzajMaskotki}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />
+				<h:outputText id="rodzajOutput" value="#{personBean.maskotka.rodzaj}" />
 
-				<h:outputText value="#{msg.personDobLabel}" />
+				<h:outputText value="#{msg.dataZakupu}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />
 				<h:outputText id="dobOutput"
-					value="#{personBean.person.dateOfBirth}" />
+					value="#{personBean.maskotka.dateOfBirth}" />
 			</h:panelGrid>
 
 		</h:form>

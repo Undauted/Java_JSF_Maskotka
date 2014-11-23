@@ -16,69 +16,64 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.example.jsfdemo.domain.Person;
-import com.example.jsfdemo.service.PersonManager;
+import com.example.jsfdemo.domain.Maskotka;
+import com.example.jsfdemo.service.MaskotkaManager;
 
 @SessionScoped
-@Named("personBean")
-public class PersonFormBean implements Serializable {
+@Named("maskotkaBean")
+public class MaskotkaFormBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Person person = new Person();
+	private Maskotka maskotka = new Maskotka();
 
-	private ListDataModel<Person> persons = new ListDataModel<Person>();
+	private ListDataModel<Maskotka> maskotki = new ListDataModel<Maskotka>();
 
 	@Inject
-	private PersonManager pm;
+	private MaskotkaManager pm;
 
-	public Person getPerson() {
-		return person;
+	public Maskotka getMaskotka() {
+		return maskotka;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setMaskotka(Maskotka maskotka) {
+		this.maskotka = maskotka;
 	}
 
-	public ListDataModel<Person> getAllPersons() {
-		persons.setWrappedData(pm.getAllPersons());
-		return persons;
+	public ListDataModel<Maskotka> getAllMaskotki() {
+		maskotki.setWrappedData(pm.getAllMaskotka());
+		return maskotki;
 	}
 
-	// Actions
+	
 	public String addPerson() {
-		pm.addPerson(person);
-		return "showPersons";
-		//return null;
+		pm.addPerson(maskotka);
+		return "wyswie";
+		
 	}
 
 	public String deletePerson() {
-		Person personToDelete = persons.getRowData();
+		Maskotka personToDelete = maskotki.getRowData();
 		pm.deletePerson(personToDelete);
 		return null;
 	}
 
-	// Validators
-
-	// Business logic validation
-	public void uniquePin(FacesContext context, UIComponent component,
+	public void uniqueImie(FacesContext context, UIComponent component,
 			Object value) {
 
-		String pin = (String) value;
+		String imie = (String) value;
 
-		for (Person person : pm.getAllPersons()) {
-			if (person.getPin().equalsIgnoreCase(pin)) {
+		for (Maskotka person : pm.getAllMaskotka()) {
+			if (person.getImie().equalsIgnoreCase(imie)) {
 				FacesMessage message = new FacesMessage(
-						"Person with this PIN already exists in database");
+						"Maskotka o tym imieniu istnieje juz na liście");
 				message.setSeverity(FacesMessage.SEVERITY_ERROR);
 				throw new ValidatorException(message);
 			}
 		}
 	}
 
-	// Multi field validation with <f:event>
-	// Rule: first two digits of PIN must match last two digits of the year of
-	// birth
+
 	public void validatePinDob(ComponentSystemEvent event) {
 
 		UIForm form = (UIForm) event.getComponent();
