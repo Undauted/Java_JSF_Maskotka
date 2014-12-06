@@ -5,14 +5,14 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import com.example.jsfdemo.domain.Maskotka;
+import com.example.jsfdemo.domain.ConverterBean;
 
 @ApplicationScoped
-public class MaskotkaManager {
-	private List<Maskotka> db = new ArrayList<Maskotka>();
+public class ConverterManager {
+	private List<ConverterBean> db = new ArrayList<ConverterBean>();
 
-	public void addPerson(Maskotka maskotka) {
-		Maskotka newMaskotka = new Maskotka();
+	public void addPerson(ConverterBean maskotka) {
+		ConverterBean newMaskotka = new ConverterBean(null);
 		
 		
 		
@@ -23,14 +23,16 @@ public class MaskotkaManager {
 		newMaskotka.setDateOfBirth(maskotka.getDateOfBirth());
 		newMaskotka.setWeight(maskotka.getWeight());
 		newMaskotka.setPin(maskotka.getPin());
+		newMaskotka.setLogin(maskotka.getLogin());
+		newMaskotka.setHaslo(maskotka.getHaslo());
 
 		db.add(newMaskotka);
 	}
 
 	
-	public void deletePerson(Maskotka maskotka) {
-		Maskotka personToRemove = null;
-		for (Maskotka p : db) {
+	public void deletePerson(ConverterBean maskotka) {
+		ConverterBean personToRemove = null;
+		for (ConverterBean p : db) {
 			if (maskotka.getMaterial().equals(p.getMaterial())) {
 				personToRemove = p;
 				break;
@@ -40,7 +42,7 @@ public class MaskotkaManager {
 			db.remove(personToRemove);
 	}
 
-	public List<Maskotka> getAllMaskotka() {
+	public List<ConverterBean> getAllMaskotka() {
 		return db;
 	}
 }

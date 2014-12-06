@@ -4,29 +4,39 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/templates/wyglad.xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+	
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:maskotka="http://maskotka.com/facelets">
 	<ui:define name="glowna">
+	<c:choose>
+		    <c:when test="#{indexBean.username != null}">
 		<h:form id="personform">
 			
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="3">
 			
 				<h:outputText value="" />
 				<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;
 				&#160;&#160;&#160;&#160;&#160;
 				&#160;&#160;&#160;&#160;
 				&#160;&#160;&#160;&#160;&#160;&#160;&#160;#{msg.dodaj}" />
+				<h:outputText value="" />
 				
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="" />
 				
 				<h:outputText value="#{personBean.maskotka.setImie('')}" />
 				<h:outputText value="#{personBean.maskotka.setRodzaj('')}" />
+				<h:outputText value="" />
 				
 				<h:outputText value="#{personBean.maskotka.setMaterial('')}" />
 				<h:outputText value="#{personBean.maskotka.setZdjecie('')}" />
+				<h:outputText value="" />
 				
 				<h:outputText value="#{personBean.maskotka.setWeight(0.0)}" />
+				<h:outputText value="" />
 				<h:outputText value="" />
 				
 				
@@ -41,51 +51,63 @@
 						}
 					</script>  
 				</f:verbatim>  
+				<h:outputText value="" />
 				
 				
 				<h:outputText value="#{msg.imieMaskotki}&#160;&#160;&#160;&#160;" />
 				<h:inputText id="name" value="#{personBean.maskotka.imie}" required="#{true}" onchange="initCap(this)">
 				</h:inputText>
+				<h:outputText value="" />
 				
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="" />
 
 				<h:outputText value="#{msg.rodzajMaskotki}&#160;&#160;" />
 				<h:selectOneRadio value="#{personBean.maskotka.rodzaj}" layout="pageDirection"
 							 required="#{true}">
-				   	<f:selectItem itemValue="Mis" itemLabel="&#160;&#160;Miś" />
-				   	<f:selectItem itemValue="Zwierzatko" itemLabel="&#160;&#160;Zwierzątko" />
-				   	<f:selectItem itemValue="Postac z bajki" itemLabel="&#160;&#160;Postać z bajki" />
-				   	<f:selectItem itemValue="Postac z filmu" itemLabel="&#160;&#160;Postać z filmu" />
-				   	<f:selectItem itemValue="Pacynka" itemLabel="&#160;&#160;Pacynka" />
+				   	<f:selectItem itemValue="${msg.mis}" itemLabel="&#160;&#160;${msg.mis}" />
+				   	<f:selectItem itemValue="${msg.zwierzatko}" itemLabel="&#160;&#160;${msg.zwierzatko}" />
+				   	<f:selectItem itemValue="${msg.postacB}" itemLabel="&#160;&#160;${msg.postacB}" />
+				   	<f:selectItem itemValue="${msg.postacF}" itemLabel="&#160;&#160;${msg.postacF}" />
+				   	<f:selectItem itemValue="${msg.pacynka}" itemLabel="&#160;&#160;${msg.pacynka}" />
 				</h:selectOneRadio>
+				<h:outputText value="" />
 				
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="" />
 				
 				<h:outputText value="#{msg.materialMaskotki}&#160;&#160;&#160;&#160;" />
 				<h:selectOneMenu value="#{personBean.maskotka.material}">
-				   <f:selectItem itemValue="Plusz" itemLabel="Plusz" />
-				   <f:selectItem itemValue="Bawelna" itemLabel="Bawełna" />	 
-				   <f:selectItem itemValue="Len" itemLabel="Len" />	
-				   <f:selectItem itemValue="Dzianina" itemLabel="Dzianina" />	
-				   <f:selectItem itemValue="Welur" itemLabel="Welur" />	 
-				   <f:selectItem itemValue="Polar" itemLabel="Polar" />	  							
+				   <f:selectItem itemValue="${msg.plusz}" itemLabel="${msg.plusz}" />
+				   <f:selectItem itemValue="${msg.bawelna}" itemLabel="${msg.bawelna}" />	 
+				   <f:selectItem itemValue="${msg.len}" itemLabel="${msg.len}" />	
+				   <f:selectItem itemValue="${msg.dzianina}" itemLabel="${msg.dzianina}" />	
+				   <f:selectItem itemValue="${msg.welur}" itemLabel="${msg.welur}" />	 
+				   <f:selectItem itemValue="${msg.polar}" itemLabel="${msg.polar}" />								
 				</h:selectOneMenu>
+				<h:outputText value="" />
 				
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="" />
 				
 				<h:outputText value="#{msg.zdjecieMaskotki}&#160;&#160;&#160;&#160;" />
-				<h:inputText id="zdjecie" value="#{personBean.maskotka.zdjecie}" required="#{true}"/>
+				<h:inputText id="zdjecie" value="#{personBean.maskotka.zdjecie}" required="#{true}">
+				<f:converter converterId="konwerter" />
+				</h:inputText>
+				<h:commandButton value="#{msg.konwersja}" id="konwerter" action="#{converterBean.akceptuj}"/>
 				
 				
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
 				<h:outputText value="&lt;br /&gt;" escape="false"/>
+				<h:outputText value="" />
 				
 				<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
-				<h:commandButton value="#{msg.zatwierdzenie}"
-				action="#{personBean.addPerson}" />
+				<maskotka:button 
+    					zatwierdz="#{msg.zatwierdzenie}" />
+    			<h:outputText value="" />
 			</h:panelGrid>
 
 			
@@ -95,5 +117,7 @@
 				<h:messages showDetail="#{true}" showSummary="#{false}" />
 			</h:panelGrid>
 		</h:form>
+		</c:when>
+		</c:choose>
 	</ui:define>
 </ui:composition>

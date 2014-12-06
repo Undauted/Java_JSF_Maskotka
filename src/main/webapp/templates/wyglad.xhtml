@@ -2,7 +2,9 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	 <h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
      <h:outputStylesheet name="bootstrap/css/bootstrap-theme.min.css" />
@@ -24,10 +26,31 @@
     </div>
     <br/>
 	 <div class="menu">
-	    	<p><a class="btn btn-default" href="glowna.jsf" >Strona Główna &raquo;</a></p>
-			<p><a class="btn btn-default" href="dodaj.jsf" >Dodaj maskotke &raquo;</a></p>
-		  	<p><a class="btn btn-default" href="wyswie.jsf" >Lista maskotek &raquo;</a></p>
-		  	<br/><br/><br/><br/><br/>
+	 	
+	 	<c:choose>
+		    <c:when test="#{indexBean.username != null}">
+		      	<p><a class="btn btn-default" href="glowna.jsf" >	#{msg.glowna} &raquo;</a></p>
+				<p><a class="btn btn-default" href="dodaj.jsf" >#{msg.dodanieMaskotki} &raquo;</a></p>
+				<p><a class="btn btn-default" href="maps.jsf" >#{msg.mapaSklepow} &raquo;</a></p>
+			  	<p><a class="btn btn-default" href="wyswie.jsf" >#{msg.lista} &raquo;</a></p>
+		    </c:when>
+		    <c:when test="#{indexBean.username == null}">
+		    	<p><a class="btn btn-default" href="glowna.jsf" >	#{msg.glowna} &raquo;</a></p>
+		    	<p><a class="btn btn-default" href="login.jsf" >	#{msg.login} &raquo;</a></p>
+				<p><a class="btn btn-default" href="rejestracja.jsf" >#{msg.rejestracja} &raquo;</a></p>
+		    </c:when>
+		</c:choose>
+	    	
+		  	<h:form>
+			<br/>
+			<h:commandButton class="btn btn-default" value="#{msg.wyloguj}" action="#{logoutBean.logout}" rendered="#{indexBean.username != null}"/>
+			#{' '}
+		
+		</h:form>
+		
+		  	<br/>
+		  	<h:outputLabel value="#{msg.witam} #{indexBean.username}" rendered="#{indexBean.username != null}"></h:outputLabel>
+		  	<br/><br/>
   			<img src="http://cdn.bulbagarden.net/upload/thumb/7/72/613Cubchoo.png/180px-613Cubchoo.png" height='100' width='100'/>
   
       </div>

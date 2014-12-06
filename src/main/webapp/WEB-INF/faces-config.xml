@@ -21,4 +21,38 @@
 		</locale-config>
 
 	</application>
+	<managed-bean>
+		<description>loginBean</description>
+		<managed-bean-name>loginBean</managed-bean-name>
+		<managed-bean-class>com.example.jsfdemo.web.LoginBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+	  <managed-bean-name>powitanie</managed-bean-name>
+	  <managed-bean-class>com.example.jsfdemo.web.HelloWorld</managed-bean-class>
+	  <managed-bean-scope>request</managed-bean-scope>
+	</managed-bean> 
+	<managed-bean>
+	  <managed-bean-name>wiadomosc</managed-bean-name>
+	  <managed-bean-class>com.example.jsfdemo.web.Message</managed-bean-class>
+	  <managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-action>login</from-action>
+			<to-view-id>/glowna.xhtml</to-view-id>
+		</navigation-case>
+		
+		</navigation-rule>
+	<navigation-rule>
+		<display-name>templates/wyglad.xhtml</display-name>
+		<from-view-id>/templates/wyglad.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>logout</from-action>
+			<to-view-id>/*</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 </faces-config>

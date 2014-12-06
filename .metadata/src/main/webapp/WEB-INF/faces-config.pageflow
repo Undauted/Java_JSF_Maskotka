@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14163045100570" configfile="/jsfdemo/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14163045100570" configfile="/jsfdemo/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="420" y="180" id="pf14171990330280" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf141728747188517" inlinks="pf14173759901570" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="glowna.xhtml" x="84" y="180" id="pf141728747188519" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf141728747188517" path="/glowna.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="templates/wyglad.xhtml" x="47" y="60" id="pf14173759901571" outlinks="pf14173759901570" path="/templates/wyglad.xhtml"/>
+  <links id="pf141728747188517" target="pf141728747188519" source="pf14171990330280" fromaction="login"/>
+  <links id="pf14173759901570" target="pf14171990330280" source="pf14173759901571" fromaction="logout"/>
+</pageflow:Pageflow>

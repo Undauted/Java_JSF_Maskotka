@@ -6,41 +6,44 @@ import java.util.Date;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIInput;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.model.ListDataModel;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
-import com.example.jsfdemo.domain.Maskotka;
-import com.example.jsfdemo.service.MaskotkaManager;
+import com.example.jsfdemo.domain.ConverterBean;
+import com.example.jsfdemo.service.ConverterManager;
 
 @SessionScoped
-@Named("maskotkaBean")
-public class MaskotkaFormBean implements Serializable {
+@ManagedBean(name = "personBean", eager = true)
+public class ConverterFormBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Maskotka maskotka = new Maskotka();
+	private ConverterBean maskotka = new ConverterBean(null);
 
-	private ListDataModel<Maskotka> maskotki = new ListDataModel<Maskotka>();
+	private ListDataModel<ConverterBean> maskotki = new ListDataModel<ConverterBean>();
 
 	@Inject
-	private MaskotkaManager pm;
+	private ConverterManager pm;
 
-	public Maskotka getMaskotka() {
+	public ConverterBean getMaskotka() {
 		return maskotka;
 	}
 
-	public void setMaskotka(Maskotka maskotka) {
+	public void setMaskotka(ConverterBean maskotka) {
 		this.maskotka = maskotka;
 	}
 
-	public ListDataModel<Maskotka> getAllMaskotki() {
+	public ListDataModel<ConverterBean> getAllMaskotki() {
 		maskotki.setWrappedData(pm.getAllMaskotka());
 		return maskotki;
 	}
@@ -51,9 +54,11 @@ public class MaskotkaFormBean implements Serializable {
 		return "wyswie";
 		
 	}
+	
+	
 
 	public String deletePerson() {
-		Maskotka personToDelete = maskotki.getRowData();
+		ConverterBean personToDelete = maskotki.getRowData();
 		pm.deletePerson(personToDelete);
 		return null;
 	}
@@ -63,7 +68,7 @@ public class MaskotkaFormBean implements Serializable {
 
 		String imie = (String) value;
 
-		for (Maskotka person : pm.getAllMaskotka()) {
+		for (ConverterBean person : pm.getAllMaskotka()) {
 			if (person.getImie().equalsIgnoreCase(imie)) {
 				FacesMessage message = new FacesMessage(
 						"Maskotka o tym imieniu istnieje juz na liście");
@@ -72,8 +77,13 @@ public class MaskotkaFormBean implements Serializable {
 			}
 		}
 	}
-
-
+	
+	
+	
+	
+	
+	
+	
 	public void validatePinDob(ComponentSystemEvent event) {
 
 		UIForm form = (UIForm) event.getComponent();

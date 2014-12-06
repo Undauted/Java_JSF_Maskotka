@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/templates/wyglad.xhtml">
+	<ui:define name="glowna">
+		<h:form prependId="false">
+			<h:messages globalOnly="true" style="color:red"></h:messages>
+			<h:panelGrid columns="2">
+			
+			<h:outputText value="" />
+				<f:verbatim>  
+					<script type="text/javascript">  
+					function validate_pass(p,r) {
+						 if(document.getElementById(p).value!=document.getElementById(r).value) {
+							 document.getElementById(r).value="";
+							 alert('Powtórzone hasło jest błędne . Prosze spróbować ponownie');
+							 
+						  } 
+						  
+						}
+					</script>  
+					
+				</f:verbatim> 
+				<h:outputText value=""/>
+				<h:outputText value=""/>
+				<c:choose>
+		    		<c:when test="#{indexBean.username == null}">
+		    			<b><h:outputText value="#{msg.napis_rej}"/></b>
+		    			   <h:outputText value=""/>
+						<h:outputText value="#{msg.uzytkownik}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
+						<h:inputText value="#{personBean.maskotka.login}" 
+							validator="#{rejestracja.uniqueLogin}" required="#{true}"/>
+							
+						<h:outputText value="#{msg.haslo}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
+						<h:inputSecret value="#{personBean.maskotka.haslo}" id="pass" required="#{true}"/>
+						
+						<h:outputText value="#{msg.powhaslo}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
+						<h:inputSecret value="#{personBean.maskotka.haslo}" id="repPass" onchange="return validate_pass('pass','repPass')" required="#{true}"/>
+						
+						<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
+						<h:commandButton value="#{msg.rejestracja}" action="#{rejestracja.addPerson2}"></h:commandButton>
+					</c:when>
+				</c:choose>
+			</h:panelGrid>
+			<h:panelGrid>
+				<h:messages showDetail="#{true}" showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
