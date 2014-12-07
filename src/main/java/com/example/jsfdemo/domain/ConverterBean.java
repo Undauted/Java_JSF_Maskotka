@@ -95,12 +95,12 @@ public class ConverterBean {
 		this.haslo = haslo;
 	}
 	
-//	 public String akceptuj() {
-//
-//	  
-//
-//	        return zdjecie;
-//
-//	    }
+	 public String akceptuj() {
+
+	  
+
+	        return "dodanie.jsf";
+
+	    }
 	
 }
